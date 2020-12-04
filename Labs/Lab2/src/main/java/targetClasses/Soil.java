@@ -6,34 +6,34 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for Country.
+ * <p>Java class for Soil.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * <p>
  * <pre>
- * &lt;simpleType name="Country">
+ * &lt;simpleType name="Soil">
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *     &lt;enumeration value="UKRAINE"/>
- *     &lt;enumeration value="JAPAN"/>
- *     &lt;enumeration value="NETHERLANDS"/>
+ *     &lt;enumeration value="PODZOLIC"/>
+ *     &lt;enumeration value="SOIL"/>
+ *     &lt;enumeration value="SODPODZOLIC"/>
  *   &lt;/restriction>
  * &lt;/simpleType>
  * </pre>
  * 
  */
-@XmlType(name = "Country")
+@XmlType(name = "Soil")
 @XmlEnum
-public enum Country {
+public enum Soil {
 
-    UKRAINE,
-    JAPAN,
-    NETHERLANDS;
+    PODZOLIC,
+    SOIL,
+    SODPODZOLIC;
 
     public String value() {
         return name();
     }
 
-    public static Country fromValue(String v) {
+    public static Soil fromValue(String v) {
         return valueOf(v);
     }
 
