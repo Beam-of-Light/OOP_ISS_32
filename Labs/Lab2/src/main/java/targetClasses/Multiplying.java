@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlType;
  * </pre>
  * 
  */
-@XmlType(name = "Multiplying")
+@XmlType(name = "Multiplying", namespace = "targetClasses")
 @XmlEnum
 public enum Multiplying {
 

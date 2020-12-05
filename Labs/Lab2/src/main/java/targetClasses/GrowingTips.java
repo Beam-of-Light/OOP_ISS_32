@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="temperature" type="{http://www.w3.org/2001/XMLSchema}integer"/>
- *         &lt;element name="lightloving" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
+ *         &lt;element name="lightLoving" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
  *         &lt;element name="watering" type="{targetClasses}WateringAmount"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
@@ -31,16 +31,18 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "GrowingTips", propOrder = {
+@XmlType(name = "GrowingTips", namespace = "targetClasses", propOrder = {
     "temperature",
-    "lightloving",
+    "lightLoving",
     "watering"
 })
 public class GrowingTips {
 
-    @XmlElement(required = true)
+    @XmlElement(namespace = "targetClasses", required = true)
     protected BigInteger temperature;
-    protected boolean lightloving;
+    @XmlElement(namespace = "targetClasses")
+    protected boolean lightLoving;
+    @XmlElement(namespace = "targetClasses")
     @XmlSchemaType(name = "integer")
     protected int watering;
 
@@ -69,19 +71,19 @@ public class GrowingTips {
     }
 
     /**
-     * Gets the value of the lightloving property.
+     * Gets the value of the lightLoving property.
      * 
      */
-    public boolean isLightloving() {
-        return lightloving;
+    public boolean isLightLoving() {
+        return lightLoving;
     }
 
     /**
-     * Sets the value of the lightloving property.
+     * Sets the value of the lightLoving property.
      * 
      */
-    public void setLightloving(boolean value) {
-        this.lightloving = value;
+    public void setLightLoving(boolean value) {
+        this.lightLoving = value;
     }
 
     /**

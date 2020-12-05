@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlType;
  * </pre>
  * 
  */
-@XmlType(name = "Country")
+@XmlType(name = "Country", namespace = "targetClasses")
 @XmlEnum
 public enum Country {
 

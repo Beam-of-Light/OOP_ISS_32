@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tar:Orangery xmlns:tar="targetClasses">
-    <tar:flower code="123">
+    <tar:flower id="ID-1">
         <tar:name>Tulip</tar:name>
         <tar:soil>SODPODZOLIC</tar:soil>
         <tar:origin>NETHERLANDS</tar:origin>
@@ -11,12 +11,12 @@
         </tar:visualParameters>
         <tar:growingTips>
             <tar:temperature>18</tar:temperature>
-            <tar:lightloving>false</tar:lightloving>
+            <tar:lightLoving>false</tar:lightLoving>
             <tar:watering>80</tar:watering>
         </tar:growingTips>
         <tar:multiplying>SEEDS</tar:multiplying>
     </tar:flower>
-    <tar:flower code="202">
+    <tar:flower id="ID-2">
         <tar:name>Orchidaceae</tar:name>
         <tar:soil>SOIL</tar:soil>
         <tar:origin>JAPAN</tar:origin>
@@ -27,23 +27,23 @@
         </tar:visualParameters>
         <tar:growingTips>
             <tar:temperature>22</tar:temperature>
-            <tar:lightloving>true</tar:lightloving>
+            <tar:lightLoving>true</tar:lightLoving>
             <tar:watering>40</tar:watering>
         </tar:growingTips>
         <tar:multiplying>SEEDS</tar:multiplying>
     </tar:flower>
-    <tar:flower code="555">
+    <tar:flower id="ID-3">
         <tar:name>Lily</tar:name>
         <tar:soil>PODZOLIC</tar:soil>
         <tar:origin>UKRAINE</tar:origin>
         <tar:visualParameters>
             <tar:stalkColor>GREEN</tar:stalkColor>
             <tar:leavesColor>YELLOW</tar:leavesColor>
-            <tar:averageSize>34</tar:averageSize>
+            <tar:averageSize>35</tar:averageSize>
         </tar:visualParameters>
         <tar:growingTips>
             <tar:temperature>15</tar:temperature>
-            <tar:lightloving>true</tar:lightloving>
+            <tar:lightLoving>true</tar:lightLoving>
             <tar:watering>90</tar:watering>
         </tar:growingTips>
         <tar:multiplying>STALKS</tar:multiplying>

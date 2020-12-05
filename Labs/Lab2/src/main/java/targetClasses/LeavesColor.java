@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlType;
  * </pre>
  * 
  */
-@XmlType(name = "LeavesColor")
+@XmlType(name = "LeavesColor", namespace = "targetClasses")
 @XmlEnum
 public enum LeavesColor {
 

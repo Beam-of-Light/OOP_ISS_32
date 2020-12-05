@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlType;
  * </pre>
  * 
  */
-@XmlType(name = "StalkColor")
+@XmlType(name = "StalkColor", namespace = "targetClasses")
 @XmlEnum
 public enum StalkColor {
 

@@ -1,13 +1,15 @@
 
 package targetClasses;
 
-import java.math.BigInteger;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -27,7 +29,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="growingTips" type="{targetClasses}GrowingTips"/>
  *         &lt;element name="multiplying" type="{targetClasses}Multiplying"/>
  *       &lt;/sequence>
- *       &lt;attribute name="code" type="{http://www.w3.org/2001/XMLSchema}integer" />
+ *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}ID" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -36,7 +38,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Flower", propOrder = {
+@XmlType(name = "Flower", namespace = "targetClasses", propOrder = {
     "name",
     "soil",
     "origin",
@@ -46,23 +48,42 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class Flower {
 
-    @XmlElement(required = true)
+    @XmlElement(namespace = "targetClasses", required = true)
     protected String name;
-    @XmlElement(required = true)
+    @XmlElement(namespace = "targetClasses", required = true)
     @XmlSchemaType(name = "string")
     protected Soil soil;
-    @XmlElement(required = true)
+    @XmlElement(namespace = "targetClasses", required = true)
     @XmlSchemaType(name = "string")
     protected Country origin;
-    @XmlElement(required = true)
+    @XmlElement(namespace = "targetClasses", required = true)
     protected VisualParameters visualParameters;
-    @XmlElement(required = true)
+    @XmlElement(namespace = "targetClasses", required = true)
     protected GrowingTips growingTips;
-    @XmlElement(required = true)
+    @XmlElement(namespace = "targetClasses", required = true)
     @XmlSchemaType(name = "string")
     protected Multiplying multiplying;
-    @XmlAttribute(name = "code")
-    protected BigInteger code;
+    @XmlAttribute(name = "id")
+    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
+    @XmlID
+    @XmlSchemaType(name = "ID")
+    protected String id;
+
+    public void print() {
+        System.out.println("Name: " + name);
+        System.out.println("ID: " + id);
+        System.out.println("Soil: " + soil);
+        System.out.println("Origin: " + origin);
+        System.out.println("Visual parameters:");
+        System.out.println("\tStalk color: " + visualParameters.stalkColor);
+        System.out.println("\tLeaves color: " + visualParameters.leavesColor);
+        System.out.println("\tAvarage size: " + visualParameters.averageSize + " cm");
+        System.out.println("Growing tips:");
+        System.out.println("\tTemperature: " + growingTips.temperature + " °C");
+        System.out.println("\tLight-loving: " + growingTips.lightLoving);
+        System.out.println("\tWatering: " + growingTips.watering + " ml per week");
+        System.out.println("multiplying: " + multiplying);
+    }
 
     /**
      * Gets the value of the name property.
@@ -209,27 +230,27 @@ public class Flower {
     }
 
     /**
-     * Gets the value of the code property.
+     * Gets the value of the id property.
      * 
      * @return
      *     possible object is
-     *     {@link BigInteger }
+     *     {@link String }
      *     
      */
-    public BigInteger getCode() {
-        return code;
+    public String getId() {
+        return id;
     }
 
     /**
-     * Sets the value of the code property.
+     * Sets the value of the id property.
      * 
      * @param value
      *     allowed object is
-     *     {@link BigInteger }
+     *     {@link String }
      *     
      */
-    public void setCode(BigInteger value) {
-        this.code = value;
+    public void setId(String value) {
+        this.id = value;
     }
 
 }

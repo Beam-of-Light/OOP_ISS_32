@@ -22,7 +22,7 @@
             <xs:element name="growingTips" type="orangeryns:GrowingTips" />
             <xs:element name="multiplying" type="orangeryns:Multiplying"/>
         </xs:sequence>
-        <xs:attribute name="code" type="xs:integer"/>
+        <xs:attribute name="id" type="xs:ID"/>
     </xs:complexType>
 
     <xs:simpleType name="Soil">
@@ -44,7 +44,7 @@
     <xs:complexType name="GrowingTips">
         <xs:sequence>
             <xs:element name="temperature" type="xs:integer"/>
-            <xs:element name="lightloving" type="xs:boolean"/>
+            <xs:element name="lightLoving" type="xs:boolean"/>
             <xs:element name = "watering" type="orangeryns:WateringAmount"/>
         </xs:sequence>
     </xs:complexType>

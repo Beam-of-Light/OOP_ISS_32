@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlType;
  * </pre>
  * 
  */
-@XmlType(name = "Soil")
+@XmlType(name = "Soil", namespace = "targetClasses")
 @XmlEnum
 public enum Soil {
 

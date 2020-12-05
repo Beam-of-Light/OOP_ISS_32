@@ -30,19 +30,20 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "VisualParameters", propOrder = {
+@XmlType(name = "VisualParameters", namespace = "targetClasses", propOrder = {
     "stalkColor",
     "leavesColor",
     "averageSize"
 })
 public class VisualParameters {
 
-    @XmlElement(required = true)
+    @XmlElement(namespace = "targetClasses", required = true)
     @XmlSchemaType(name = "string")
     protected StalkColor stalkColor;
-    @XmlElement(required = true)
+    @XmlElement(namespace = "targetClasses", required = true)
     @XmlSchemaType(name = "string")
     protected LeavesColor leavesColor;
+    @XmlElement(namespace = "targetClasses")
     @XmlSchemaType(name = "integer")
     protected int averageSize;
 
