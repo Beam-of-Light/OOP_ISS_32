@@ -243,13 +243,13 @@ public class Flower {
         if (this == o) return true;
         if (!(o instanceof Flower)) return false;
         Flower flower = (Flower) o;
-        return Objects.equals(getName(), flower.getName())
-                && getSoil() == flower.getSoil()
-                && getOrigin() == flower.getOrigin()
-                && Objects.equals(getVisualParameters(), flower.getVisualParameters())
-                && Objects.equals(getGrowingTips(), flower.getGrowingTips())
-                && getMultiplying() == flower.getMultiplying()
-                && Objects.equals(getId(), flower.getId());
+        return Objects.equals(getName(), flower.getName()) &&
+                getSoil() == flower.getSoil() &&
+                getOrigin() == flower.getOrigin() &&
+                Objects.equals(getVisualParameters(), flower.getVisualParameters()) &&
+                Objects.equals(getGrowingTips(), flower.getGrowingTips()) &&
+                getMultiplying() == flower.getMultiplying() &&
+                Objects.equals(getId(), flower.getId());
     }
 
     @Override

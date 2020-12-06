@@ -1,10 +1,7 @@
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import parsers.OrangeryHandler;
-import parsers.ParserDOM;
-import parsers.ParserSAXHandler;
-import parsers.ParserStAX;
+import parsers.*;
 import targetClasses.*;
 
 import java.math.BigInteger;
@@ -66,7 +63,7 @@ public class ParserTest {
     @Test
     @DisplayName("Check for correct SAX parser")
     void parserSAX() {
-        ParserSAXHandler parserSAXHandler = new ParserSAXHandler();
+        Parser parserSAXHandler = new ParserSAXHandler();
         Orangery resultOrangery = parserSAXHandler.parse(XML_FILE_PATH);
         assertTrue(orangery.equals(resultOrangery));
     }
@@ -74,7 +71,7 @@ public class ParserTest {
     @Test
     @DisplayName("Check for correct StAX parser")
     void parserStAX() {
-        ParserStAX parserStAX = new ParserStAX();
+        Parser parserStAX = new ParserStAX();
         Orangery resultOrangery = parserStAX.parse(XML_FILE_PATH);
         assertTrue(orangery.equals(resultOrangery));
     }
@@ -82,7 +79,7 @@ public class ParserTest {
     @Test
     @DisplayName("Check for correct DOM parser")
     void parserDOM() {
-        ParserDOM parserDOM = new ParserDOM();
+        Parser parserDOM = new ParserDOM();
         Orangery resultOrangery = parserDOM.parse(XML_FILE_PATH);
         assertTrue(orangery.equals(resultOrangery));
     }

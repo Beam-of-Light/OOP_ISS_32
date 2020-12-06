@@ -117,9 +117,9 @@ public class VisualParameters {
         if (this == o) return true;
         if (!(o instanceof VisualParameters)) return false;
         VisualParameters that = (VisualParameters) o;
-        return getAverageSize() == that.getAverageSize()
-                && getStalkColor() == that.getStalkColor()
-                && getLeavesColor() == that.getLeavesColor();
+        return getAverageSize() == that.getAverageSize() &&
+                getStalkColor() == that.getStalkColor() &&
+                getLeavesColor() == that.getLeavesColor();
     }
 
     @Override

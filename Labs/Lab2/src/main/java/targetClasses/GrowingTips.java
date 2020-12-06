@@ -108,9 +108,9 @@ public class GrowingTips {
         if (this == o) return true;
         if (!(o instanceof GrowingTips)) return false;
         GrowingTips that = (GrowingTips) o;
-        return isLightLoving() == that.isLightLoving()
-                && getWatering() == that.getWatering()
-                && Objects.equals(getTemperature(), that.getTemperature());
+        return isLightLoving() == that.isLightLoving() &&
+                getWatering() == that.getWatering() &&
+                Objects.equals(getTemperature(), that.getTemperature());
     }
 
     @Override
