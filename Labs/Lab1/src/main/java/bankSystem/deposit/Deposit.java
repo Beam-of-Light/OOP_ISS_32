@@ -27,6 +27,14 @@ public class Deposit {
         }
     }
 
+    public Deposit(Deposit deposit) {
+        this.bankName = deposit.bankName;
+        this.percent = deposit.percent;
+        this.monthsDuration = deposit.monthsDuration;
+        this.earlyWithdrawal = deposit.earlyWithdrawal;
+        this.rechargeable = deposit.rechargeable;
+    }
+
     public String getBankName() {
         return bankName;
     }
