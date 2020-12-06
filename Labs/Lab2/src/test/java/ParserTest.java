@@ -1,4 +1,5 @@
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import parsers.OrangeryHandler;
 import parsers.ParserDOM;
@@ -13,7 +14,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ParserTest {
     public static final String XML_FILE_PATH = "src/main/resources/orangery.xml";
-    public static final String XSD_FILE_PATH = "src/main/resources/orangery.xsd";
     static Orangery orangery;
 
     @BeforeAll
@@ -64,6 +64,7 @@ public class ParserTest {
     }
 
     @Test
+    @DisplayName("Check for correct SAX parser")
     void parserSAX() {
         ParserSAXHandler parserSAXHandler = new ParserSAXHandler();
         Orangery resultOrangery = parserSAXHandler.parse(XML_FILE_PATH);
@@ -71,6 +72,7 @@ public class ParserTest {
     }
 
     @Test
+    @DisplayName("Check for correct StAX parser")
     void parserStAX() {
         ParserStAX parserStAX = new ParserStAX();
         Orangery resultOrangery = parserStAX.parse(XML_FILE_PATH);
@@ -78,6 +80,7 @@ public class ParserTest {
     }
 
     @Test
+    @DisplayName("Check for correct DOM parser")
     void parserDOM() {
         ParserDOM parserDOM = new ParserDOM();
         Orangery resultOrangery = parserDOM.parse(XML_FILE_PATH);
