@@ -12,10 +12,11 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 
-public class ParserDOM {
+public class ParserDOM implements Parser {
     private static final Logger log = LoggerFactory.getLogger(ParserDOM.class);
 
-    public static void parse() {
+    @Override
+    public Orangery parse(String xmlFilePath) {
         try {
             DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             Document document = documentBuilder.parse("BookCatalog.xml");
@@ -24,5 +25,6 @@ public class ParserDOM {
         } catch (IOException | SAXException | ParserConfigurationException ex) {
             log.error(ex.getMessage());
         }
+        return null;
     }
 }

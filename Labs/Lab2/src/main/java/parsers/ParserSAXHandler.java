@@ -11,23 +11,21 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import java.io.IOException;
-import java.math.BigInteger;
 
-public class ParserSAXHandler extends DefaultHandler {
+public class ParserSAXHandler extends DefaultHandler implements Parser {
     private static final Logger log = LoggerFactory.getLogger(ParserSAXHandler.class);
     private Orangery orangery;
     private Flower currentFlower;
     private String tagContent;
 
     public static void main(String[] args) {
-        Orangery resultOrangery = parse("src/main/resources/orangery.xml");
-        for (Flower flower : resultOrangery.getFlower()) {
-            flower.print();
-            System.out.println();
-        }
+        ParserSAXHandler parserSAXHandler = new ParserSAXHandler();
+        Orangery resultOrangery = parserSAXHandler.parse(OrangeryHandler.XML_FILE_PATH);
+        OrangeryHandler.print(resultOrangery);
     }
 
-    public static Orangery parse(String xmlFilePath) {
+    @Override
+    public Orangery parse(String xmlFilePath) {
         try {
             SAXParserFactory factory = SAXParserFactory.newInstance();
             SAXParser saxParser = factory.newSAXParser();
@@ -52,15 +50,15 @@ public class ParserSAXHandler extends DefaultHandler {
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
         switch (qName) {
-            case "tar:flower":
+            case OrangeryHandler.FLOWER:
                 currentFlower = new Flower();
-                currentFlower.setId(attributes.getValue(0));
+                OrangeryHandler.setField(currentFlower, OrangeryHandler.ID, attributes.getValue(0));
                 orangery.getFlower().add(currentFlower);    // Adding new flower to list
                 break;
-            case "tar:visualParameters":
+            case OrangeryHandler.VISUAL_PARAMETERS:
                 currentFlower.setVisualParameters(new VisualParameters());
                 break;
-            case "tar:growingTips":
+            case OrangeryHandler.GROWING_TIPS:
                 currentFlower.setGrowingTips(new GrowingTips());
                 break;
         }
@@ -73,37 +71,6 @@ public class ParserSAXHandler extends DefaultHandler {
 
     @Override
     public void endElement(String uri, String localName, String qName) throws SAXException {
-        switch (qName) {
-            case "tar:name":
-                currentFlower.setName(tagContent);
-                break;
-            case "tar:soil":
-                currentFlower.setSoil(Soil.valueOf(tagContent));
-                break;
-            case "tar:origin":
-                currentFlower.setOrigin(Country.valueOf(tagContent));
-                break;
-            case "tar:multiplying":
-                currentFlower.setMultiplying(Multiplying.valueOf(tagContent));
-                break;
-            case "tar:temperature":
-                currentFlower.getGrowingTips().setTemperature(BigInteger.valueOf(Long.parseLong(tagContent)));
-                break;
-            case "tar:lightLoving":
-                currentFlower.getGrowingTips().setLightLoving(Boolean.parseBoolean(tagContent));
-                break;
-            case "tar:watering":
-                currentFlower.getGrowingTips().setWatering(Integer.parseInt(tagContent));
-                break;
-            case "tar:stalkColor":
-                currentFlower.getVisualParameters().setStalkColor(StalkColor.valueOf(tagContent));
-                break;
-            case "tar:leavesColor":
-                currentFlower.getVisualParameters().setLeavesColor(LeavesColor.valueOf(tagContent));
-                break;
-            case "tar:averageSize":
-                currentFlower.getVisualParameters().setAverageSize(Integer.parseInt(tagContent));
-                break;
-        }
+        OrangeryHandler.setField(currentFlower, qName, tagContent);
     }
 }

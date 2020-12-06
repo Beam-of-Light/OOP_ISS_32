@@ -69,22 +69,6 @@ public class Flower {
     @XmlSchemaType(name = "ID")
     protected String id;
 
-    public void print() {
-        System.out.println("Name: " + name);
-        System.out.println("ID: " + id);
-        System.out.println("Soil: " + soil);
-        System.out.println("Origin: " + origin);
-        System.out.println("Visual parameters:");
-        System.out.println("\tStalk color: " + visualParameters.stalkColor);
-        System.out.println("\tLeaves color: " + visualParameters.leavesColor);
-        System.out.println("\tAvarage size: " + visualParameters.averageSize + " cm");
-        System.out.println("Growing tips:");
-        System.out.println("\tTemperature: " + growingTips.temperature + " °C");
-        System.out.println("\tLight-loving: " + growingTips.lightLoving);
-        System.out.println("\tWatering: " + growingTips.watering + " ml per week");
-        System.out.println("multiplying: " + multiplying);
-    }
-
     /**
      * Gets the value of the name property.
      * 
