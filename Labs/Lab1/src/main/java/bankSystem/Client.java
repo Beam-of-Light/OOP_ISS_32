@@ -1,5 +1,7 @@
 package bankSystem;
 
+import bankSystem.deposit.Deposit;
+
 import java.util.List;
 
 public class Client {
