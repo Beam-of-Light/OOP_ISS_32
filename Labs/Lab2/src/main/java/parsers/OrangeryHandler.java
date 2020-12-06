@@ -6,6 +6,7 @@ import java.math.BigInteger;
 
 public class OrangeryHandler {
     public static final String XML_FILE_PATH = "src/main/resources/orangery.xml";
+    public static final String XSD_FILE_PATH = "src/main/resources/orangery.xsd";
 
     public static final String PREFIX = "tar:";
     public static final String FLOWER = "tar:flower";
