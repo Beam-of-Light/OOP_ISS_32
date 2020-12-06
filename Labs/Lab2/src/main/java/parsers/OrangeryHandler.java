@@ -35,7 +35,7 @@ public class OrangeryHandler {
 
         ParserStAX parserStAX = new ParserStAX();
         Orangery resultOrangery = parserStAX.parse(XML_FILE_PATH);
-        OrangeryHandler.print(resultOrangery);
+        OrangeryHandler.sortAndPrint(resultOrangery);
     }
 
     public static void setField(Flower flower, String field, String value) {
@@ -99,7 +99,8 @@ public class OrangeryHandler {
         System.out.println("multiplying: " + flower.getMultiplying());
     }
 
-    public static void print(Orangery orangery) {
+    public static void sortAndPrint(Orangery orangery) {
+        orangery.getFlower().sort(new FlowerComparator());
         for (Flower flower : orangery.getFlower()) {
             print(flower);
             System.out.println();
