@@ -22,6 +22,16 @@ public class OrangeryHandler {
     public static final String LEAVES_COLOR = "tar:leavesColor";
     public static final String AVERAGE_SIZE = "tar:averageSize";
 
+    public static void main(String[] args) {
+//        ParserSAXHandler parserSAXHandler = new ParserSAXHandler();
+//        Orangery resultOrangery = parserSAXHandler.parse(XML_FILE_PATH);
+//        OrangeryHandler.print(resultOrangery);
+
+        ParserDOM parserDOM = new ParserDOM();
+        Orangery resultOrangery = parserDOM.parse(XML_FILE_PATH);
+        OrangeryHandler.print(resultOrangery);
+    }
+
     public static void setField(Flower flower, String field, String value) {
         switch (field) {
             case NAME:
@@ -58,6 +68,13 @@ public class OrangeryHandler {
                 flower.getVisualParameters().setAverageSize(Integer.parseInt(value));
                 break;
         }
+    }
+
+    public static Flower createFlower() {
+        Flower flower = new Flower();
+        flower.setVisualParameters(new VisualParameters());
+        flower.setGrowingTips(new GrowingTips());
+        return flower;
     }
 
     public static void print(Flower flower) {

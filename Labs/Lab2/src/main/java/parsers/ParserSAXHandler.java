@@ -18,11 +18,6 @@ public class ParserSAXHandler extends DefaultHandler implements Parser {
     private Flower currentFlower;
     private String tagContent;
 
-    public static void main(String[] args) {
-        ParserSAXHandler parserSAXHandler = new ParserSAXHandler();
-        Orangery resultOrangery = parserSAXHandler.parse(OrangeryHandler.XML_FILE_PATH);
-        OrangeryHandler.print(resultOrangery);
-    }
 
     @Override
     public Orangery parse(String xmlFilePath) {
