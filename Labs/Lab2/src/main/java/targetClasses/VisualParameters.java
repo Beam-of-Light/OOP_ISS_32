@@ -6,6 +6,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import java.util.Objects;
 
 
 /**
@@ -111,4 +112,18 @@ public class VisualParameters {
         this.averageSize = value;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof VisualParameters)) return false;
+        VisualParameters that = (VisualParameters) o;
+        return getAverageSize() == that.getAverageSize()
+                && getStalkColor() == that.getStalkColor()
+                && getLeavesColor() == that.getLeavesColor();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getStalkColor(), getLeavesColor(), getAverageSize());
+    }
 }

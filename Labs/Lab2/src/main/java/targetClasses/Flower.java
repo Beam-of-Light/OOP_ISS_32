@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.util.Objects;
 
 
 /**
@@ -237,4 +238,22 @@ public class Flower {
         this.id = value;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Flower)) return false;
+        Flower flower = (Flower) o;
+        return Objects.equals(getName(), flower.getName())
+                && getSoil() == flower.getSoil()
+                && getOrigin() == flower.getOrigin()
+                && Objects.equals(getVisualParameters(), flower.getVisualParameters())
+                && Objects.equals(getGrowingTips(), flower.getGrowingTips())
+                && getMultiplying() == flower.getMultiplying()
+                && Objects.equals(getId(), flower.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getName(), getSoil(), getOrigin(), getVisualParameters(), getGrowingTips(), getMultiplying(), getId());
+    }
 }

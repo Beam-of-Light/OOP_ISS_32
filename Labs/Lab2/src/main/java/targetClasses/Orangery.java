@@ -3,6 +3,7 @@ package targetClasses;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -68,4 +69,16 @@ public class Orangery {
         return this.flower;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Orangery)) return false;
+        Orangery orangery = (Orangery) o;
+        return Objects.equals(getFlower(), orangery.getFlower());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getFlower());
+    }
 }

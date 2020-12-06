@@ -2,6 +2,7 @@
 package targetClasses;
 
 import java.math.BigInteger;
+import java.util.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -102,4 +103,18 @@ public class GrowingTips {
         this.watering = value;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof GrowingTips)) return false;
+        GrowingTips that = (GrowingTips) o;
+        return isLightLoving() == that.isLightLoving()
+                && getWatering() == that.getWatering()
+                && Objects.equals(getTemperature(), that.getTemperature());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getTemperature(), isLightLoving(), getWatering());
+    }
 }
