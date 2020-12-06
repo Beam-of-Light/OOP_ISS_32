@@ -7,6 +7,7 @@ import java.math.BigInteger;
 public class OrangeryHandler {
     public static final String XML_FILE_PATH = "src/main/resources/orangery.xml";
 
+    public static final String PREFIX = "tar:";
     public static final String FLOWER = "tar:flower";
     public static final String VISUAL_PARAMETERS = "tar:visualParameters";
     public static final String GROWING_TIPS = "tar:growingTips";
@@ -27,8 +28,12 @@ public class OrangeryHandler {
 //        Orangery resultOrangery = parserSAXHandler.parse(XML_FILE_PATH);
 //        OrangeryHandler.print(resultOrangery);
 
-        ParserDOM parserDOM = new ParserDOM();
-        Orangery resultOrangery = parserDOM.parse(XML_FILE_PATH);
+//        ParserDOM parserDOM = new ParserDOM();
+//        Orangery resultOrangery = parserDOM.parse(XML_FILE_PATH);
+//        OrangeryHandler.print(resultOrangery);
+
+        ParserStAX parserStAX = new ParserStAX();
+        Orangery resultOrangery = parserStAX.parse(XML_FILE_PATH);
         OrangeryHandler.print(resultOrangery);
     }
 

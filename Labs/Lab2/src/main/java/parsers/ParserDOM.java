@@ -16,8 +16,6 @@ import java.io.IOException;
 
 public class ParserDOM implements Parser {
     private static final Logger log = LoggerFactory.getLogger(ParserDOM.class);
-    private Orangery orangery;
-    private Flower currentFlower;
 
     @Override
     public Orangery parse(String xmlFilePath) {
@@ -27,10 +25,10 @@ public class ParserDOM implements Parser {
             Node root = document.getDocumentElement();
             root.normalize();
 
-            orangery = new Orangery();
+            Orangery orangery = new Orangery();
             NodeList nodeListFlowers = document.getElementsByTagName(OrangeryHandler.FLOWER);
             for (int i = 0; i < nodeListFlowers.getLength(); ++i) {
-                currentFlower = OrangeryHandler.createFlower();
+                Flower currentFlower = OrangeryHandler.createFlower();
 
                 Node nodeFlower = nodeListFlowers.item(i);
                 if (nodeFlower.getNodeType() == Node.ELEMENT_NODE) {
