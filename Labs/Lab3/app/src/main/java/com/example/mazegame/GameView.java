@@ -78,29 +78,25 @@ public class GameView extends View {
     }
 
     public static void removeTheWall(Cell current, Cell next) {
-        //  next
-        //    |
-        // current
+        // current up next
         if (current.col == next.col && current.row == next.row + 1) {
             current.topWall = false;
             next.bottomWall = false;
         }
 
-        // current
-        //    |
-        //   next
+        // current down next
         if (current.col == next.col && current.row == next.row - 1) {
             current.bottomWall = false;
             next.topWall = false;
         }
 
-        // next <- current
+        // current left next
         if (current.col == next.col+1 && current.row == next.row) {
             current.leftWall = false;
             next.rightWall = false;
         }
 
-        // current -> next
+        // current right next
         if (current.col == next.col - 1 && current.row == next.row) {
             current.rightWall = false;
             next.leftWall = false;
@@ -110,28 +106,28 @@ public class GameView extends View {
     public static Cell getNeighbour(Cell[][] cells, Cell cell) {
         List<Cell> neighbours = new ArrayList<>();
 
-        //left neighbour
+        // left neighbour
         if (cell.col > 0) {
             if (!cells[cell.col - 1][cell.row].visited) {
                 neighbours.add(cells[cell.col - 1][cell.row]);
             }
         }
 
-        //right neighbour
+        // right neighbour
         if (cell.col < COLS-1) {
             if (!cells[cell.col + 1][cell.row].visited) {
                 neighbours.add(cells[cell.col + 1][cell.row]);
             }
         }
 
-        //top neighbour
+        // top neighbour
         if (cell.row > 0) {
             if (!cells[cell.col][cell.row - 1].visited) {
                 neighbours.add(cells[cell.col][cell.row - 1]);
             }
         }
 
-        //bottom neighbour
+        // bottom neighbour
         if (cell.row < ROWS-1) {
             if (!cells[cell.col][cell.row + 1].visited) {
                 neighbours.add(cells[cell.col][cell.row + 1]);
@@ -152,24 +148,24 @@ public class GameView extends View {
         int height = getHeight();
 
         if (width/height < COLS/ROWS)
-            cellSize = height / (ROWS +1);
+            cellSize = height / (ROWS + 1);
         else
             cellSize = width / (COLS + 1);
 
-        hMargin = (width - COLS * cellSize)/2;
-        vMargin = (height - ROWS * cellSize)/2;
+        hMargin = (width - COLS * cellSize) / 2;
+        vMargin = (height - ROWS * cellSize) / 2;
 
 
         canvas.translate(hMargin, vMargin);
 
-        for (int x = 0; x < COLS; x++) {
-            for (int y = 0; y < ROWS; y++) {
+        for (int x = 0; x < COLS; ++x) {
+            for (int y = 0; y < ROWS; ++y) {
                if (cells[x][y].topWall) {
                    canvas.drawLine(
-                           x*cellSize,
-                           y*cellSize,
-                           (x+1)*cellSize,
-                           y*cellSize,
+                           x * cellSize,
+                           y * cellSize,
+                           (x + 1) * cellSize,
+                           y * cellSize,
                            wallPaint
                    );
                }
@@ -204,40 +200,40 @@ public class GameView extends View {
             }
         }
 
-        float margin = cellSize/10;
+        float margin = cellSize / 10;
 
         canvas.drawRect(
-                player.col * cellSize+margin,
-                player.row * cellSize+margin,
+                player.col * cellSize + margin,
+                player.row * cellSize + margin,
                 (player.col + 1) * cellSize - margin,
                 (player.row + 1) * cellSize - margin,
                 playerPaint);
 
         canvas.drawRect(
-                exit.col * cellSize+margin,
-                exit.row * cellSize+margin,
-                (exit.col + 1) * cellSize-margin,
-                (exit.row + 1) * cellSize-margin,
+                exit.col * cellSize + margin,
+                exit.row * cellSize + margin,
+                (exit.col + 1) * cellSize - margin,
+                (exit.row + 1) * cellSize - margin,
                 exitPaint);
     }
 
     public void movePlayer(Direction direction){
-        switch (direction){
+        switch (direction) {
             case UP:
                 if (!player.topWall)
-                    player = cells[player.col][player.row-1];
+                    player = cells[player.col][player.row - 1];
                 break;
             case DOWN:
                 if (!player.bottomWall)
-                    player = cells[player.col][player.row+1];
+                    player = cells[player.col][player.row + 1];
                 break;
             case LEFT:
                 if (!player.leftWall)
-                    player = cells[player.col-1][player.row];
+                    player = cells[player.col - 1][player.row];
                 break;
             case RIGHT:
                 if (!player.rightWall)
-                    player = cells[player.col+1][player.row];
+                    player = cells[player.col + 1][player.row];
                 break;
         }
         checkExit();
@@ -258,8 +254,8 @@ public class GameView extends View {
             float x = event.getX();
             float y = event.getY();
 
-            float playerCenterX = hMargin + (player.col+0.5f)*cellSize;
-            float playerCenterY = vMargin + (player.row+0.5f)*cellSize;
+            float playerCenterX = hMargin + (player.col + 0.5f) * cellSize;
+            float playerCenterY = vMargin + (player.row + 0.5f) * cellSize;
 
             float dx = x - playerCenterX;
             float dy = y - playerCenterY;
@@ -269,14 +265,14 @@ public class GameView extends View {
 
             if (absDX > cellSize || absDY > cellSize ){
                 if (absDX > absDY){
-                    //move in x-direction
+                    // move in x-direction
                     if (dx > 0) {
                         movePlayer(Direction.RIGHT);
                     } else {
                         movePlayer(Direction.LEFT);
                     }
                 } else {
-                    //move in y-direction
+                    // move in y-direction
                     if (dy > 0) {
                         movePlayer(Direction.DOWN);
                     } else {
