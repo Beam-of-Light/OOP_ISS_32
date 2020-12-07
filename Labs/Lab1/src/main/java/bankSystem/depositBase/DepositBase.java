@@ -19,11 +19,15 @@ public class DepositBase {
         this.availableDeposits = availableDeposits;
     }
 
-    public void addDeposit(Deposit deposit) {
+    public List<Deposit> getAvailableDeposits() {
+        return availableDeposits;
+    }
+
+    public boolean addDeposit(Deposit deposit) {
         if (availableDeposits == null) {
             availableDeposits = new LinkedList<Deposit>();
         }
-        availableDeposits.add(deposit);
+        return availableDeposits.add(deposit);
     }
 
     public boolean removeDeposit(Deposit deposit) {
@@ -56,5 +60,16 @@ public class DepositBase {
             }
         }
         return new DepositBase(result);
+    }
+
+    @Override
+    public String toString() {
+        String result = "";
+        for (Deposit item : availableDeposits) {
+            result = result + item + '\n';
+        }
+        return "DepositBase{" +
+                "availableDeposits=" + availableDeposits +
+                '}';
     }
 }

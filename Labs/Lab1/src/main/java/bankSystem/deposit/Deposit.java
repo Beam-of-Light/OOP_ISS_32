@@ -1,5 +1,7 @@
 package bankSystem.deposit;
 
+import java.util.Objects;
+
 public class Deposit {
     private final String bankName;
     private final int percent;
@@ -64,5 +66,22 @@ public class Deposit {
                 ", earlyWithdrawal=" + earlyWithdrawal +
                 ", rechargeable=" + rechargeable +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Deposit)) return false;
+        Deposit deposit = (Deposit) o;
+        return getPercent() == deposit.getPercent() &&
+                getMonthsDuration() == deposit.getMonthsDuration() &&
+                isEarlyWithdrawal() == deposit.isEarlyWithdrawal() &&
+                isRechargeable() == deposit.isRechargeable() &&
+                Objects.equals(getBankName(), deposit.getBankName());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getBankName(), getPercent(), getMonthsDuration(), isEarlyWithdrawal(), isRechargeable());
     }
 }
