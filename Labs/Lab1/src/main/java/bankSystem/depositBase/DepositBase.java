@@ -55,7 +55,7 @@ public class DepositBase {
     public DepositBase findByEarlyWithdrawal(boolean shouldBeEarlyWithdrawal) {
         List<Deposit> result = new LinkedList<>();
         for (Deposit item : availableDeposits) {
-            if (item.isRechargeable() == shouldBeEarlyWithdrawal) {
+            if (item.isEarlyWithdrawal() == shouldBeEarlyWithdrawal) {
                 result.add(new Deposit(item));
             }
         }
@@ -68,8 +68,6 @@ public class DepositBase {
         for (Deposit item : availableDeposits) {
             result = result + item + '\n';
         }
-        return "DepositBase{" +
-                "availableDeposits=" + availableDeposits +
-                '}';
+        return result;
     }
 }
