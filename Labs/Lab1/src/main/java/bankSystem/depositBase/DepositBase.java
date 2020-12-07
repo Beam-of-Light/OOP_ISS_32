@@ -6,6 +6,7 @@ import bankSystem.deposit.DepositPercentComparator;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 public class DepositBase {
     private List<Deposit> availableDeposits;
@@ -69,5 +70,18 @@ public class DepositBase {
             result = result + item + '\n';
         }
         return result;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof DepositBase)) return false;
+        DepositBase that = (DepositBase) o;
+        return Objects.equals(getAvailableDeposits(), that.getAvailableDeposits());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getAvailableDeposits());
     }
 }
