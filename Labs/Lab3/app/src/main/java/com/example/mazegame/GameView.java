@@ -65,7 +65,7 @@ public class GameView extends View {
 
         do {
             next = getNeighbour(cells, current);
-            if(next!=null){
+            if (next!=null) {
                 removeTheWall(current, next);
                 stack.push(current);
                 current = next;
