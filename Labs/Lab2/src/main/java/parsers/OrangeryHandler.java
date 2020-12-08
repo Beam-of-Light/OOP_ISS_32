@@ -26,17 +26,17 @@ public class OrangeryHandler {
 
 
     public static void main(String[] args) {
-        Parser parserSAXHandler = new ParserSAXHandler();
-        Orangery resultOrangery = parserSAXHandler.parse(XML_FILE_PATH);
-        OrangeryHandler.sortAndPrint(resultOrangery);
+//        Parser parserSAXHandler = new ParserSAXHandler();
+//        Orangery resultOrangery = parserSAXHandler.parse(XML_FILE_PATH);
+//        OrangeryHandler.sortAndPrint(resultOrangery);
 
 //        Parser parserDOM = new ParserDOM();
 //        Orangery resultOrangery = parserDOM.parse(XML_FILE_PATH);
 //        OrangeryHandler.sortAndPrint(resultOrangery);
 
-//        Parser parserStAX = new ParserStAX();
-//        Orangery resultOrangery = parserStAX.parse(XML_FILE_PATH);
-//        OrangeryHandler.sortAndPrint(resultOrangery);
+        Parser parserStAX = new ParserStAX();
+        Orangery resultOrangery = parserStAX.parse(XML_FILE_PATH);
+        OrangeryHandler.sortAndPrint(resultOrangery);
     }
 
     public static void setField(Orangery orangery, String field, String value) {
