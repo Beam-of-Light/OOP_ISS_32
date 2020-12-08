@@ -9,9 +9,6 @@ public class OrangeryHandler {
     public static final String XSD_FILE_PATH = "src/main/resources/orangery.xsd";
 
     public static final String PREFIX = "tar:";
-    public static final String FLOWER = "flower";
-    public static final String VISUAL_PARAMETERS = "visualParameters";
-    public static final String GROWING_TIPS = "growingTips";
     public static final String NAME = "name";
     public static final String ID = "id";
     public static final String SOIL = "soil";
@@ -30,13 +27,13 @@ public class OrangeryHandler {
 //        Orangery resultOrangery = parserSAXHandler.parse(XML_FILE_PATH);
 //        OrangeryHandler.sortAndPrint(resultOrangery);
 
-//        Parser parserDOM = new ParserDOM();
-//        Orangery resultOrangery = parserDOM.parse(XML_FILE_PATH);
-//        OrangeryHandler.sortAndPrint(resultOrangery);
-
-        Parser parserStAX = new ParserStAX();
-        Orangery resultOrangery = parserStAX.parse(XML_FILE_PATH);
+        Parser parserDOM = new ParserDOM();
+        Orangery resultOrangery = parserDOM.parse(XML_FILE_PATH);
         OrangeryHandler.sortAndPrint(resultOrangery);
+
+//        Parser parserStAX = new ParserStAX();
+//        Orangery resultOrangery = parserStAX.parse(XML_FILE_PATH);
+//        OrangeryHandler.sortAndPrint(resultOrangery);
     }
 
     public static void setField(Orangery orangery, String field, String value) {
@@ -51,9 +48,6 @@ public class OrangeryHandler {
             flower = orangery.getFlower().get(orangery.getFlower().size() - 1);
         }
         switch (field) {
-//            case FLOWER:
-//                flower = createFlower();
-//                break;
             case NAME:
                 flower.setName(value);
                 break;
@@ -89,15 +83,6 @@ public class OrangeryHandler {
                 break;
         }
     }
-
-//    public static void setAttribute(Flower flower, String attribute, String value) {
-//        attribute = removePrefix(attribute);
-//        switch (attribute) {
-//            case ID:
-//                flower.setId(value);
-//                break;
-//        }
-//    }
 
     private static String removePrefix(String tag) {
         return tag.replace(PREFIX, "");

@@ -1,6 +1,5 @@
 package parsers;
 
-import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import targetClasses.*;
 import com.sun.org.slf4j.internal.Logger;
@@ -17,6 +16,21 @@ import java.io.IOException;
 public class ParserDOM implements Parser {
     private static final Logger log = LoggerFactory.getLogger(ParserDOM.class);
 
+    private void parseElementsRecursive(Node element, Orangery orangery) {
+        for (int i = 0; i < element.getAttributes().getLength(); ++i) {
+            Node attribute = element.getAttributes().item(i);
+            OrangeryHandler.setField(orangery, attribute.getNodeName(), attribute.getNodeValue());
+        }
+        OrangeryHandler.setField(orangery, element.getNodeName(), element.getTextContent());
+
+        NodeList children = element.getChildNodes();
+        for (int i = 0; i < children.getLength(); ++i) {
+            Node child = children.item(i);
+            if (child.getNodeType() == Node.ELEMENT_NODE)
+                parseElementsRecursive(child, orangery);
+        }
+    }
+
     @Override
     public Orangery parse(String xmlFilePath) {
         try {
@@ -26,40 +40,11 @@ public class ParserDOM implements Parser {
             root.normalize();
 
             Orangery orangery = new Orangery();
-            NodeList nodeListFlowers = document.getElementsByTagName(OrangeryHandler.FLOWER);
-            for (int i = 0; i < nodeListFlowers.getLength(); ++i) {
-                Flower currentFlower = OrangeryHandler.createFlower();
-
-                Node nodeFlower = nodeListFlowers.item(i);
-                if (nodeFlower.getNodeType() == Node.ELEMENT_NODE) {
-                    Element element = (Element) nodeFlower;
-                    OrangeryHandler.setField(orangery/*, currentFlower*/, OrangeryHandler.ID,
-                            element.getAttributes().item(0).getNodeValue());
-                    setField(orangery, currentFlower, element, OrangeryHandler.NAME);
-                    setField(orangery, currentFlower, element, OrangeryHandler.SOIL);
-                    setField(orangery, currentFlower, element, OrangeryHandler.ORIGIN);
-                    setField(orangery, currentFlower, element, OrangeryHandler.MULTIPLYiNG);
-
-                    Element childElement = (Element) element.getElementsByTagName(OrangeryHandler.VISUAL_PARAMETERS).item(0);
-                    setField(orangery, currentFlower, childElement, OrangeryHandler.STALK_COLOR);
-                    setField(orangery, currentFlower, childElement, OrangeryHandler.LEAVES_COLOR);
-                    setField(orangery, currentFlower, childElement, OrangeryHandler.AVERAGE_SIZE);
-
-                    childElement = (Element) element.getElementsByTagName(OrangeryHandler.GROWING_TIPS).item(0);
-                    setField(orangery, currentFlower, childElement, OrangeryHandler.TEMPERATURE);
-                    setField(orangery, currentFlower, childElement, OrangeryHandler.LIGHT_LOVING);
-                    setField(orangery, currentFlower, childElement, OrangeryHandler.WATERING);
-                }
-                orangery.getFlower().add(currentFlower);
-            }
+            parseElementsRecursive(root, orangery);
             return orangery;
         } catch (IOException | SAXException | ParserConfigurationException ex) {
             log.error(ex.getMessage());
         }
         return null;
-    }
-
-    private static void setField(Orangery orangery, Flower flower, Element element, String name) {
-        OrangeryHandler.setField(orangery/*, flower*/, name, element.getElementsByTagName(name).item(0).getTextContent());
     }
 }
