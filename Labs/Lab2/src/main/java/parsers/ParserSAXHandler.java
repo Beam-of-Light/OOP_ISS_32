@@ -15,7 +15,6 @@ import java.io.IOException;
 public class ParserSAXHandler extends DefaultHandler implements Parser {
     private static final Logger log = LoggerFactory.getLogger(ParserSAXHandler.class);
     private Orangery orangery;
-    private Flower currentFlower;
     private String tagContent;
 
 
@@ -44,18 +43,8 @@ public class ParserSAXHandler extends DefaultHandler implements Parser {
 
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
-        switch (qName) {
-            case OrangeryHandler.FLOWER:
-                currentFlower = new Flower();
-                OrangeryHandler.setField(currentFlower, OrangeryHandler.ID, attributes.getValue(0));
-                orangery.getFlower().add(currentFlower);    // Adding new flower to list
-                break;
-            case OrangeryHandler.VISUAL_PARAMETERS:
-                currentFlower.setVisualParameters(new VisualParameters());
-                break;
-            case OrangeryHandler.GROWING_TIPS:
-                currentFlower.setGrowingTips(new GrowingTips());
-                break;
+        for (int i = 0; i < attributes.getLength(); ++i) {
+            OrangeryHandler.setField(orangery, attributes.getLocalName(i), attributes.getValue(i));
         }
     }
 
@@ -66,6 +55,6 @@ public class ParserSAXHandler extends DefaultHandler implements Parser {
 
     @Override
     public void endElement(String uri, String localName, String qName) throws SAXException {
-        OrangeryHandler.setField(currentFlower, qName, tagContent);
+        OrangeryHandler.setField(orangery, qName, tagContent);
     }
 }

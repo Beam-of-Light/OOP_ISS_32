@@ -33,22 +33,22 @@ public class ParserDOM implements Parser {
                 Node nodeFlower = nodeListFlowers.item(i);
                 if (nodeFlower.getNodeType() == Node.ELEMENT_NODE) {
                     Element element = (Element) nodeFlower;
-                    OrangeryHandler.setField(currentFlower, OrangeryHandler.ID,
+                    OrangeryHandler.setField(orangery/*, currentFlower*/, OrangeryHandler.ID,
                             element.getAttributes().item(0).getNodeValue());
-                    setField(currentFlower, element, OrangeryHandler.NAME);
-                    setField(currentFlower, element, OrangeryHandler.SOIL);
-                    setField(currentFlower, element, OrangeryHandler.ORIGIN);
-                    setField(currentFlower, element, OrangeryHandler.MULTIPLYiNG);
+                    setField(orangery, currentFlower, element, OrangeryHandler.NAME);
+                    setField(orangery, currentFlower, element, OrangeryHandler.SOIL);
+                    setField(orangery, currentFlower, element, OrangeryHandler.ORIGIN);
+                    setField(orangery, currentFlower, element, OrangeryHandler.MULTIPLYiNG);
 
                     Element childElement = (Element) element.getElementsByTagName(OrangeryHandler.VISUAL_PARAMETERS).item(0);
-                    setField(currentFlower, childElement, OrangeryHandler.STALK_COLOR);
-                    setField(currentFlower, childElement, OrangeryHandler.LEAVES_COLOR);
-                    setField(currentFlower, childElement, OrangeryHandler.AVERAGE_SIZE);
+                    setField(orangery, currentFlower, childElement, OrangeryHandler.STALK_COLOR);
+                    setField(orangery, currentFlower, childElement, OrangeryHandler.LEAVES_COLOR);
+                    setField(orangery, currentFlower, childElement, OrangeryHandler.AVERAGE_SIZE);
 
                     childElement = (Element) element.getElementsByTagName(OrangeryHandler.GROWING_TIPS).item(0);
-                    setField(currentFlower, childElement, OrangeryHandler.TEMPERATURE);
-                    setField(currentFlower, childElement, OrangeryHandler.LIGHT_LOVING);
-                    setField(currentFlower, childElement, OrangeryHandler.WATERING);
+                    setField(orangery, currentFlower, childElement, OrangeryHandler.TEMPERATURE);
+                    setField(orangery, currentFlower, childElement, OrangeryHandler.LIGHT_LOVING);
+                    setField(orangery, currentFlower, childElement, OrangeryHandler.WATERING);
                 }
                 orangery.getFlower().add(currentFlower);
             }
@@ -59,7 +59,7 @@ public class ParserDOM implements Parser {
         return null;
     }
 
-    private static void setField(Flower flower, Element element, String name) {
-        OrangeryHandler.setField(flower, name, element.getElementsByTagName(name).item(0).getTextContent());
+    private static void setField(Orangery orangery, Flower flower, Element element, String name) {
+        OrangeryHandler.setField(orangery/*, flower*/, name, element.getElementsByTagName(name).item(0).getTextContent());
     }
 }

@@ -9,37 +9,51 @@ public class OrangeryHandler {
     public static final String XSD_FILE_PATH = "src/main/resources/orangery.xsd";
 
     public static final String PREFIX = "tar:";
-    public static final String FLOWER = "tar:flower";
-    public static final String VISUAL_PARAMETERS = "tar:visualParameters";
-    public static final String GROWING_TIPS = "tar:growingTips";
-    public static final String NAME = "tar:name";
-    public static final String ID = "tar:id";
-    public static final String SOIL = "tar:soil";
-    public static final String ORIGIN = "tar:origin";
-    public static final String MULTIPLYiNG = "tar:multiplying";
-    public static final String TEMPERATURE = "tar:temperature";
-    public static final String LIGHT_LOVING = "tar:lightLoving";
-    public static final String WATERING = "tar:watering";
-    public static final String STALK_COLOR = "tar:stalkColor";
-    public static final String LEAVES_COLOR = "tar:leavesColor";
-    public static final String AVERAGE_SIZE = "tar:averageSize";
+    public static final String FLOWER = "flower";
+    public static final String VISUAL_PARAMETERS = "visualParameters";
+    public static final String GROWING_TIPS = "growingTips";
+    public static final String NAME = "name";
+    public static final String ID = "id";
+    public static final String SOIL = "soil";
+    public static final String ORIGIN = "origin";
+    public static final String MULTIPLYiNG = "multiplying";
+    public static final String TEMPERATURE = "temperature";
+    public static final String LIGHT_LOVING = "lightLoving";
+    public static final String WATERING = "watering";
+    public static final String STALK_COLOR = "stalkColor";
+    public static final String LEAVES_COLOR = "leavesColor";
+    public static final String AVERAGE_SIZE = "averageSize";
+
 
     public static void main(String[] args) {
-//        Parser parserSAXHandler = new ParserSAXHandler();
-//        Orangery resultOrangery = parserSAXHandler.parse(XML_FILE_PATH);
-//        OrangeryHandler.print(resultOrangery);
+        Parser parserSAXHandler = new ParserSAXHandler();
+        Orangery resultOrangery = parserSAXHandler.parse(XML_FILE_PATH);
+        OrangeryHandler.sortAndPrint(resultOrangery);
 
 //        Parser parserDOM = new ParserDOM();
 //        Orangery resultOrangery = parserDOM.parse(XML_FILE_PATH);
-//        OrangeryHandler.print(resultOrangery);
+//        OrangeryHandler.sortAndPrint(resultOrangery);
 
-        Parser parserStAX = new ParserStAX();
-        Orangery resultOrangery = parserStAX.parse(XML_FILE_PATH);
-        OrangeryHandler.sortAndPrint(resultOrangery);
+//        Parser parserStAX = new ParserStAX();
+//        Orangery resultOrangery = parserStAX.parse(XML_FILE_PATH);
+//        OrangeryHandler.sortAndPrint(resultOrangery);
     }
 
-    public static void setField(Flower flower, String field, String value) {
+    public static void setField(Orangery orangery, String field, String value) {
+        Flower flower;
+        field = removePrefix(field);
+        if (field.equals(ID)) {
+            flower = createFlower();
+            orangery.getFlower().add(flower);   // Adding new flower to list
+        } else if (orangery.getFlower().size() == 0) {
+            return;
+        } else {
+            flower = orangery.getFlower().get(orangery.getFlower().size() - 1);
+        }
         switch (field) {
+//            case FLOWER:
+//                flower = createFlower();
+//                break;
             case NAME:
                 flower.setName(value);
                 break;
@@ -74,6 +88,19 @@ public class OrangeryHandler {
                 flower.getVisualParameters().setAverageSize(Integer.parseInt(value));
                 break;
         }
+    }
+
+//    public static void setAttribute(Flower flower, String attribute, String value) {
+//        attribute = removePrefix(attribute);
+//        switch (attribute) {
+//            case ID:
+//                flower.setId(value);
+//                break;
+//        }
+//    }
+
+    private static String removePrefix(String tag) {
+        return tag.replace(PREFIX, "");
     }
 
     public static Flower createFlower() {

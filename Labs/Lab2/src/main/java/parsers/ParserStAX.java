@@ -29,20 +29,20 @@ public class ParserStAX implements Parser {
                 XMLEvent currEvent = reader.nextEvent();
                 if (currEvent.isStartElement()) {
                     StartElement startElement = currEvent.asStartElement();
-                    if ((OrangeryHandler.PREFIX + startElement.getName().getLocalPart()).equals(OrangeryHandler.FLOWER)) {
+                    if (startElement.getName().getLocalPart().equals(OrangeryHandler.FLOWER)) {
                         currentFlower = OrangeryHandler.createFlower();
                         String attribute = ((Attribute) startElement.getAttributes().next()).getValue();
-                        OrangeryHandler.setField(currentFlower, OrangeryHandler.ID, attribute);
+                        OrangeryHandler.setField(orangery/*, currentFlower*/, OrangeryHandler.ID, attribute);
                     }
 
                     XMLEvent nextEvent = reader.peek();
                     if (nextEvent.isCharacters()) {
-                        setField(currentFlower, startElement, nextEvent);
+                        setField(orangery, currentFlower, startElement, nextEvent);
                     }
                 }
                 if (currEvent.isEndElement()) {
                     EndElement endElement = currEvent.asEndElement();
-                    if ((OrangeryHandler.PREFIX + endElement.getName().getLocalPart()).equals(OrangeryHandler.FLOWER)) {
+                    if (endElement.getName().getLocalPart().equals(OrangeryHandler.FLOWER)) {
                         orangery.getFlower().add(currentFlower);
                     }
                 }
@@ -53,10 +53,10 @@ public class ParserStAX implements Parser {
         return orangery;
     }
 
-    private void setField(Flower currentFlower, StartElement startElement, XMLEvent event) {
+    private void setField(Orangery orangery, Flower currentFlower, StartElement startElement, XMLEvent event) {
         if (event.isCharacters()) {
             String field = OrangeryHandler.PREFIX + startElement.getName().getLocalPart();
-            OrangeryHandler.setField(currentFlower, field, event.asCharacters().getData());
+            OrangeryHandler.setField(orangery/*, currentFlower*/, field, event.asCharacters().getData());
         }
     }
 }
